@@ -1,0 +1,14 @@
+.login-box{
+    border-style: solid;
+    padding: 10px;
+    background-color: rgba(143, 148, 146, 0.363);
+    border-radius: 15px 50px;
+    border-width: 5px 10px 5px 20px;
+}
+
+.center-div{
+    margin-left: 19vw;
+    margin-top: 25vh;
+    margin-right: 19vw;
+    margin-bottom: 25vh;
+}
