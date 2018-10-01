@@ -17,11 +17,14 @@ export default class FirebaseService {
         return query;
     };
 
-    static pushData = (node, objToSubmit) => {
-        const ref = firebaseDatabase.ref(node).push();
-        const id = firebaseDatabase.ref(node).push().key;
-        ref.set(objToSubmit);
-        return id;
+    static pushData = (collection, objToSubmit) => {
+        firebaseDatabase.collection(collection).add(objToSubmit)
+        .then((doc) =>{
+            console.log('Doc Adicionado')
+        })
+        .catch((error) => {
+            alert(error.message)
+        })
     };
 
     static remove = (id, node) => {
@@ -53,7 +56,7 @@ export default class FirebaseService {
     };
 
     static createUser = (email, password) => {
-        return firebaseAuth.createUserWithEmailAndPassword(email, password);
+        return firebaseAuth.createUserWithEmailAndPassword(email, password)
     };
 
     static login = (email, password) => {

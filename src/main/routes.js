@@ -3,13 +3,15 @@ import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-route
 
 import App from './App'
 //import DefaultPage from '../pages/Default'
-import AuthPage from '../pages/auth/AuthPage'
+import LoginPage from '../pages/auth/LoginPage'
+import RegisterUserPage from '../pages/auth/RegisterPage'
 
 export default props => (
 
     <Router history={browserHistory}>
         <Route path='/' component={App}>
-            <IndexRoute component={AuthPage} />
+            <IndexRoute component={LoginPage} />
+            <Route path='register' component={RegisterUserPage}/>
         </Route>
         <Redirect from='*' to='/' />
     </Router>

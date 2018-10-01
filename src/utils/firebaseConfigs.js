@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import 'firebase/firestore'
 
 const prodConfig = {
     apiKey: "AIzaSyAUYNk7BotEDFv_lwq6-4j-W8wI7_U2uqA",
@@ -23,5 +24,5 @@ const config = process.env.NODE_ENV === 'production'
     : devConfig
 
 export const firebaseImpl = firebase.initializeApp(config)
-export const firebaseDatabase = firebase.database()
+export const firebaseDatabase = firebase.firestore()
 export const firebaseAuth = firebase.auth()
