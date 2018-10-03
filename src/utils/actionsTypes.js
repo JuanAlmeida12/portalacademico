@@ -1,0 +1,16 @@
+export const LOGIN_ACTIONS = {
+    LOGIN: 'LOGIN',
+    LOGOUT: 'LOGOUT'
+}
+
+export const DASHBOARD_ACTIONS = {
+    FETCHING: 'FETCHING_SUBJECTS',
+    FETCHED: 'FETCH_COMPLETED',
+    ADD: 'ADD_SUBJECT',
+    REMOVE: 'REMOVE_SUBJECT'
+}
+
+export const LOAD_ACTIONS = {
+    START: 'START_LOADING',
+    STOP: 'STOP_LOADING'
+}

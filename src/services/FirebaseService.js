@@ -1,4 +1,5 @@
 import {firebaseDatabase, firebaseAuth} from '../utils/firebaseConfigs'
+import COLLECTIONS from '../utils/collections'
 
 export default class FirebaseService {
     static getDataList = (nodePath, callback, size = 10) => {
@@ -17,38 +18,59 @@ export default class FirebaseService {
         return query;
     };
 
-    static pushData = (collection, objToSubmit) => {
+    static pushData = (collection, objToSubmit, callback) => {
         firebaseDatabase.collection(collection).add(objToSubmit)
         .then((doc) =>{
-            console.log('Doc Adicionado')
+            callback(doc)
         })
         .catch((error) => {
-            alert(error.message)
+            callback(null, error)
         })
     };
 
-    static remove = (id, node) => {
-        return firebaseDatabase.ref(node + '/' + id).remove();
+    static remove = (collection, id, callback) => {
+        firebaseDatabase.collection(collection).doc(id).delete()
+        .then((doc) =>{
+            callback(doc)
+        })
+        .catch((error) => {
+            callback(null, error)
+        })
     };
 
-    static getUniqueDataBy = (node, id, callback) => {
-        const ref = firebaseDatabase.ref(node + '/' + id);
-        let newData = {};
-        ref.once('value', (dataSnapshot) => {
+    static getUserExtraInfo = (id, callback) => {
+        firebaseDatabase.collection(COLLECTIONS.USER).where('uid','==', id)
+        .get()
+        .then(docs => {
+            docs.forEach(doc =>{
+                callback(doc.data())
+            })
+        })
+    }
 
-            if (!dataSnapshot || dataSnapshot === undefined || !dataSnapshot.val() || dataSnapshot.val() === undefined) {
-                callback(null);
-                return;
-            }
+    static getSubjectsList = (id, usertype, callback) => {
+        let query
+        console.log(COLLECTIONS.SUBEJECTS)
+        
+        if( usertype === '0' ){
+            query = firebaseDatabase.collection(COLLECTIONS.SUBEJECTS).where('teacher', '===', id)
+        } else if ( usertype === '1' ) {
+            query = firebaseDatabase.collection(COLLECTIONS.SUBEJECTS).where(`students.${id}`, '==', true)
+        } else {
+            return []
+        }
+        
+        query.get().then(subjects => {
+            let data = []
+            subjects.forEach(subject =>{
+                data.push(subject.data())
+            })
+            callback(data)
+        })
+    }
 
-            const snap = dataSnapshot.val();
-            const keys = Object.keys(snap);
-            keys.forEach((key) => {
-                newData[key] = snap[key]
-            });
-        }).then(() => {
-            callback(newData);
-        });
+    static getUniqueDataBy = (collection, id) => {
+        return firebaseDatabase.collection(collection).doc(id)
     };
 
     static updateData = (id, node, obj) => {

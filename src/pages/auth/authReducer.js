@@ -1,13 +1,14 @@
 import FirebaseService from "../../services/FirebaseService";
+const INITIAL_STATE = { user: null }
 
-export default (state = null, action) => {
+export default (state = INITIAL_STATE, action) => {
     if (action.type === 'LOGIN') {
-        return action.user;
+        return { ...state, user:action.payload};
     }
 
     if (action.type === 'LOGOUT') {
         FirebaseService.logout();
-        return null;
+        return INITIAL_STATE;
     }
 
     return state;
