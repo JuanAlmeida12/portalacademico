@@ -21,5 +21,5 @@ class AuthOrApp extends Component {
 }
 
 
-const mapStateToProps = state => {console.log(state); return { auth: state.auth }}
+const mapStateToProps = state => {; return { auth: state.auth }}
 export default connect(mapStateToProps)(AuthOrApp)

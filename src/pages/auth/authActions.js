@@ -1,15 +1,15 @@
 import FirebaseService from '../../services/FirebaseService'
 import * as LoadingActions from '../../shared/loadingActions'
+import { AUTH_ACTIONS } from '../../utils/actionsTypes'
 
 export const login = (email, password) => dispatch => {
-        console.log('antes')
         dispatch(LoadingActions.startLoading())
         FirebaseService.login(email, password)
         .then((user) => {
             FirebaseService.getUserExtraInfo(user.uid, info => {
                 console.log('antes')
                 dispatch(LoadingActions.stopLoading())
-                dispatch({type: 'LOGIN', payload: { ...user,  ...info}})
+                dispatch({type: AUTH_ACTIONS.LOGIN, payload: { ...user,  ...info}})
                 console.log('depois')
             })
         })
@@ -17,3 +17,5 @@ export const login = (email, password) => dispatch => {
             alert("Falha no Login")
         });
     }
+
+export const logout = () => ({ type: AUTH_ACTIONS.LOGOUT })

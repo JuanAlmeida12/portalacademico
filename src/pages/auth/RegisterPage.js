@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FirebaseService from "../../services/FirebaseService";
-import { Button, Form, FormGroup, Label, Input, Row } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Container } from 'reactstrap';
 import { browserHistory } from 'react-router'
 import './auth.css'
 
@@ -19,7 +19,7 @@ export default class RegisterUserPage extends Component {
     createUser = (event) => {
         event.preventDefault();
         const {email, password, confirm_password, user_type, name} = this.state;
-        console.log(email)
+        
         if(password === confirm_password){
         FirebaseService.createUser(email, password).then(
             (user) => {
@@ -37,6 +37,7 @@ export default class RegisterUserPage extends Component {
 
     render() {
         return (
+            <Container>
             <div className="col-md-4 login-box center-div">
             <h1>Portal Acadêmico</h1>
             <hr className="my-2" />
@@ -59,8 +60,8 @@ export default class RegisterUserPage extends Component {
                         <Input type="password" name="confirm_password" id="userConfirmPassword" onChange={this.handleChange('confirm_password')} placeholder="Confirmar Senha" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="exampleSelect">Tipo de Usuário</Label>
-                        <Input type="select" name="select" onChange={this.handleChange('user_type')} id="exampleSelect">
+                        <Label for="statusSelect">Tipo de Usuário</Label>
+                        <Input type="select" name="select" onChange={this.handleChange('user_type')} id="statusSelect">
                             <option value='0'>Professor</option>
                             <option value='1'>Aluno</option>
                         </Input>
@@ -68,15 +69,16 @@ export default class RegisterUserPage extends Component {
                     <FormGroup>
                         <Row>
                             <div className="col-md-8" style={{padding:'10px'}}>
-                                <Button type="submit" color="info">Registrar</Button>
+                                <Button id='registerBt' type="submit" color="info">Registrar</Button>
                             </div>
                             <div className="col-md-4" style={{paddingTop:'10px'}} >
-                                <Button onClick={() =>{ browserHistory.push('/') }}>Cancelar</Button>
+                                <Button id='cancelBt' onClick={() =>{ browserHistory.push('/') }}>Cancelar</Button>
                             </div>              
                         </Row>
                     </FormGroup>
                 </Form>
             </div>
+            </Container>
         );
     }
 }

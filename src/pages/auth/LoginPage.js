@@ -6,7 +6,7 @@ import { login } from './authActions'
 
 import './auth.css'
 
-class LoginPage extends Component {
+export class LoginPage extends Component {
   constructor(props) {
     super(props)
     this.state = {email: '', password: ''}
@@ -42,10 +42,10 @@ class LoginPage extends Component {
             <FormGroup>
               <Row>
                 <div className="col-md-8" style={{padding:'10px'}}>
-                  <Button color="info">Login</Button>
+                  <Button id="loginBt" color="info">Login</Button>
                 </div>
                 <div className="col-md-4" style={{paddingTop:'10px'}} >
-                  <Button onClick={() => browserHistory.push('/register')}>Registrar</Button>
+                  <Button id="registerBt" onClick={() => browserHistory.push('/register')}>Registrar</Button>
                 </div>              
               </Row>
             </FormGroup>

@@ -1,38 +1,33 @@
 import FirebaseService from '../../services/FirebaseService'
 import { DASHBOARD_ACTIONS } from '../../utils/actionsTypes'
-import COLLECTIONS from '../../utils/collections'
+import { SUBJECT_STATUS } from '../../utils/subjectsStatus'
 
-export const fetchSubjects = (user) => dispatch => {
+export const fetchActiveSubjects = (user) => dispatch => {
     dispatch(fetchingDataAction())
-    FirebaseService.getSubjectsList(user.uid, user.utype, data => {
-        dispatch(fetchCompletedAction(data))
+    FirebaseService.getSubjectsList(user.uid, user.utype, SUBJECT_STATUS.IN_PROGRESS , data => {
+        dispatch(fetchActiveCompletedAction(data))
     })
 }
 
-export const addSubject = subject => dispatch => {
-    FirebaseService.pushData(COLLECTIONS.SUBEJECTS, subject, (data, error) => {
-        if (error) {
-            alert(`Não foi possivel adicionar: ${error.message}`)
-        } else {
-            dispatch(addSubjectAction(data))
-        }
+export const fetchOpenSubjects = (user) => dispatch => {
+    dispatch(fetchingDataAction())
+    FirebaseService.getSubjectsList(null , null, SUBJECT_STATUS.OPEN , data => {
+        dispatch(fetchOpenCompletedAction(data))
     })
 }
 
-export const removeSubject = subject => dispatch => {
-    FirebaseService.remove(COLLECTIONS.SUBEJECTS, subject, (data, error) => {
-        if (error) {
-            alert(`Não foi possivel Remover: ${error.message}`)
-        } else {
-            dispatch(removeSubjectAction(data))
-        }
+export const fetchOldSubjects = (user) => dispatch => {
+    dispatch(fetchingDataAction())
+    FirebaseService.getAllSubjectsList(user.uid, user.utype, data => {
+        dispatch(fetchOldCompletedAction(data))
     })
 }
+
 
 export const fetchingDataAction = () => ({ type: DASHBOARD_ACTIONS.FETCHING })
 
-export const addSubjectAction = (data) => ({ type: DASHBOARD_ACTIONS.ADD, payload: data })
+export const fetchActiveCompletedAction = (data) => ({ type: DASHBOARD_ACTIONS.FETCHED_ACTIVE, payload: data })
 
-export const removeSubjectAction = (data) => ({ type: DASHBOARD_ACTIONS.REMOVE, payload: data })
+export const fetchOpenCompletedAction = (data) => ({ type: DASHBOARD_ACTIONS.FETCHED_OPEN, payload: data })
 
-export const fetchCompletedAction = (data) => ({ type: DASHBOARD_ACTIONS.FETCHED, payload: data })
+export const fetchOldCompletedAction = (data) => ({ type: DASHBOARD_ACTIONS.FETCHED_OLD, payload: data })

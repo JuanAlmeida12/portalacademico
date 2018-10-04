@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap'
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames'
 import SubjectsContentTab from './subjectsContentTab'
+import HistoryTab from './historyTab'
 
 import './infoTable.css'
 export default class InfoTable extends Component {
@@ -10,9 +11,7 @@ export default class InfoTable extends Component {
         this.toggle = this.toggle.bind(this)
         let { user } = this.props
         let tabText
-        console.log('------------------');
-        console.log(user)
-        
+
         if ( user.utype === '0' ) {
           tabText = 'Disciplinas Ministradas'
         } else {
@@ -49,7 +48,7 @@ export default class InfoTable extends Component {
                   className={classnames({ active: this.state.activeTab === '2' })}
                   onClick={() => { this.toggle('2') }}
                 >
-                  Moar Tabs
+                  Histórico
                 </NavLink>
               </NavItem>
             </Nav>
@@ -64,23 +63,12 @@ export default class InfoTable extends Component {
               </TabPane>
               <TabPane className="table-content" tabId="2">
                 <Row>
-                  <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                      <Button>Go somewhere</Button>
-                    </Card>
-                  </Col>
-                  <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                      <Button>Go somewhere</Button>
-                    </Card>
+                  <Col sm="12">
+                    <HistoryTab />
                   </Col>
                 </Row>
               </TabPane>
-            </TabContent>
+            </TabContent> 
             </div>
           </div>
         )

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CustomNavBar from './components/navbar'
 import InfoTable from './components/infoTable'
 
 export class DashBoardPage extends Component {
@@ -8,7 +7,6 @@ export class DashBoardPage extends Component {
     let { user } = this.props
     return (
       <div className='container'>
-          <CustomNavBar />
         <div className='row'>
           <InfoTable user={user} />
         </div>
