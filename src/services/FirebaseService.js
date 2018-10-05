@@ -71,7 +71,6 @@ export default class FirebaseService {
 
     static getSubjectsList = (id, usertype, status, callback) => {
         let query
-        console.log('typeeeeeeeeeeeeeee', id)
         if (id) {
             if( usertype === '0' ){
                 query = firebaseDatabase.collection(COLLECTIONS.SUBEJECTS).where('status', '==', status).where('professor.uid', '==', id)
@@ -94,7 +93,6 @@ export default class FirebaseService {
 
     static getAllSubjectsList = (id, usertype, callback) => {
         let query
-        console.log(COLLECTIONS.SUBEJECTS)
         
         if( usertype === '0' ){
             query = firebaseDatabase.collection(COLLECTIONS.SUBEJECTS).where('professor.uid', '==', id)

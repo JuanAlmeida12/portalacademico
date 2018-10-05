@@ -7,10 +7,8 @@ export const login = (email, password) => dispatch => {
         FirebaseService.login(email, password)
         .then((user) => {
             FirebaseService.getUserExtraInfo(user.uid, info => {
-                console.log('antes')
                 dispatch(LoadingActions.stopLoading())
                 dispatch({type: AUTH_ACTIONS.LOGIN, payload: { ...user,  ...info}})
-                console.log('depois')
             })
         })
         .catch(error => {

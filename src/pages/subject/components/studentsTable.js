@@ -21,7 +21,7 @@ export default class TableStudents extends React.Component {
         const { data } = this.state
         let newDate = { }
         for(let i in data) {
-            newDate[i.uid] = data[i]
+            newDate[data[i].uid] = data[i]
         }
         this.props.pushStudents(newDate)
     }

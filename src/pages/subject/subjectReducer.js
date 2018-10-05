@@ -4,7 +4,6 @@ const INITIAL_STATE = { subject: {}, fetched: false }
 
 export default (state = INITIAL_STATE, action) => {
     if (action.type === SUBJECT_PAGE_ACTIONS.FETCHED) {
-        console.log('aaaaaaaaaaaaaaaaaaaaaa', action.payload)
         return { ...state, subject: action.payload, fetched:true }
     }
 

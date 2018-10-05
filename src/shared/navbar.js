@@ -17,7 +17,6 @@ export class CustomNavBar extends Component {
 
   logoutFunc = event => {
     event.preventDefault()
-    console.log('logout')
     this.props.dispatch(logout())
   }
 

@@ -18,7 +18,7 @@ export const update = subject => dispatch => {
     FirebaseService.updateData(COLLECTIONS.SUBEJECTS,subject.id, subject, (data, error) => {
         //dispatch(LoadingActions.stopLoading())
         if(!error) {
-            dispatch(fetchCompletedAction(data))
+            dispatch(fetchSubject(data))
         }
     })
 }

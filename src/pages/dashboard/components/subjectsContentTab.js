@@ -11,7 +11,6 @@ export class SubjectsContentTab extends React.Component {
     }
     render() {
         let { subjects_in_progress, subjects_open } = this.props
-        console.log(`22222222222222222222222222222222${subjects_in_progress}`)
         return (
             <div>
                 <div>
