@@ -7,7 +7,7 @@ export default class TableSubjects extends React.Component {
         const subjects = this.props.subjects
          
         return (
-        <Table striped>
+        <Table responsive>
             <thead>
                 <tr>
                     <th>Disciplina</th>
